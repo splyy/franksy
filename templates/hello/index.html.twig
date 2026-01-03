@@ -1,0 +1,206 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfony 8.0 + FrankenPHP{% endblock %}
+
+{% block body %}
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #000 0%, #434343 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 2.5rem;
+        }
+        .card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .card.purple { border-left-color: #667eea; }
+        .card.blue { border-left-color: #4299e1; }
+        .card.green { border-left-color: #48bb78; }
+        .card.orange { border-left-color: #ed8936; }
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .card li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: center;
+        }
+        .card li:before {
+            content: "✓";
+            color: #48bb78;
+            font-weight: bold;
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .link-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            text-decoration: none;
+            color: #2d3748;
+            transition: all 0.2s;
+        }
+        .link-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        .link-card .emoji {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #a0aec0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            white-space: pre;
+        }
+        .code-block .command {
+            color: #48bb78;
+        }
+        .code-block .comment {
+            color: #718096;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .content { padding: 1.5rem; }
+        }
+    </style>
+<div class="container">
+    <div class="header">
+        <h1>🚀 {{ message }}</h1>
+        <p>Template moderne pour vos projets Symfony</p>
+    </div>
+
+    <div class="content">
+        <div class="card purple">
+            <h2>⚡ Stack Technique</h2>
+            <ul>
+                <li><strong>Symfony</strong> 8.0 <span class="badge">Latest</span></li>
+                <li><strong>PHP</strong> 8.5</li>
+                <li><strong>FrankenPHP</strong> avec mode worker activé</li>
+                <li><strong>PostgreSQL</strong> 15 Alpine</li>
+                <li><strong>Caddy</strong> 2.x avec HTTPS automatique (mkcert)</li>
+            </ul>
+        </div>
+
+        <div class="card blue">
+            <h2>🛠️ Outils Qualité</h2>
+            <ul>
+                <li><strong>PHPStan</strong> niveau 6 + extensions Symfony & Doctrine</li>
+                <li><strong>PHP-CS-Fixer</strong> avec règles @Symfony</li>
+                <li><strong>Docker</strong> avec hot-reload</li>
+            </ul>
+        </div>
+
+        <div class="card green">
+            <h2>🎯 Routes de Démonstration</h2>
+            <div class="links">
+                <a href="/" class="link-card">
+                    <div class="emoji">🏠</div>
+                    <div>Accueil</div>
+                </a>
+                <a href="/hello/Symfony" class="link-card">
+                    <div class="emoji">👋</div>
+                    <div>Hello Symfony</div>
+                </a>
+                <a href="/hello/FrankenPHP" class="link-card">
+                    <div class="emoji">🐘</div>
+                    <div>Hello FrankenPHP</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="card orange">
+            <h2>💻 Commandes Makefile</h2>
+            <div class="code-block"><span class="comment"># Démarrage</span>
+<span class="command">make build</span>      <span class="comment"># Construit les images Docker</span>
+<span class="command">make certs</span>      <span class="comment"># Génère les certificats HTTPS (mkcert)</span>
+<span class="command">make up</span>         <span class="comment"># Démarre les conteneurs</span>
+<span class="command">make logs</span>       <span class="comment"># Affiche les logs en temps réel</span>
+
+<span class="comment"># Qualité de code</span>
+<span class="command">make phpstan</span>    <span class="comment"># Analyse statique du code</span>
+<span class="command">make cs-fix</span>     <span class="comment"># Corrige le style de code</span>
+<span class="command">make cs-check</span>   <span class="comment"># Vérifie le style (sans modifier)</span>
+
+<span class="comment"># Aide</span>
+<span class="command">make help</span>       <span class="comment"># Liste toutes les commandes disponibles</span></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

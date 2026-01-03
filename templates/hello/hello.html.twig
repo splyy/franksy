@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ name }}!{% endblock %}
+
+{% block body %}
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 4rem 3rem;
+            text-align: center;
+        }
+        .emoji {
+            font-size: 6rem;
+            animation: wave 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(20deg); }
+            75% { transform: rotate(-20deg); }
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 1.5rem 0;
+        }
+        .info {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        .info strong {
+            color: #2d3748;
+        }
+        .tech-badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        .badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #000 0%, #434343 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        @media (max-width: 768px) {
+            .container { padding: 2rem 1.5rem; }
+            h1 { font-size: 2.5rem; }
+            .emoji { font-size: 4rem; }
+        }
+    </style>
+<div class="container">
+    <div class="emoji">👋</div>
+    <h1>Hello, {{ name }}!</h1>
+
+    <div class="info">
+        Cette page est servie par <strong>FrankenPHP</strong> en mode worker<br>
+        avec <strong>Symfony 8.0</strong> et <strong>PHP 8.5</strong>
+
+        <div class="tech-badges">
+            <span class="badge">⚡ Worker Mode</span>
+            <span class="badge">🐘 PHP 8.5</span>
+            <span class="badge">🚀 Symfony 8.0</span>
+        </div>
+    </div>
+
+    <a href="/" class="btn">← Retour à l'accueil</a>
+</div>
+{% endblock %}

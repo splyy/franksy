@@ -1,0 +1,43 @@
+# Git
+.git
+.gitignore
+# Docker
+Dockerfile
+compose*.yml
+.docker
+.dockerignore
+
+# Symfony - fichiers générés
+/var
+/vendor
+/.env.local
+/.env.*.local
+
+# Cache et logs
+*.cache
+
+# IDE et éditeurs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Tests et qualité
+/phpunit.xml
+/phpstan.neon
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+/coverage
+
+# Documentation
+/docs
+
+# Node (si assets)
+/node_modules
+/npm-debug.log
+/yarn-error.log

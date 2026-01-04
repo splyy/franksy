@@ -27,6 +27,11 @@
 /certs/*.key
 ###< mkcert ###
 
+###> tailwindcss ###
+/tailwindcss
+/public/build/app.css
+###< tailwindcss ###
+
 ###> symfony/asset-mapper ###
 /public/assets/
 /assets/vendor/

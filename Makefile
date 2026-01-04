@@ -1,4 +1,4 @@
-.PHONY: help build up down restart logs ps composer certs phpstan phpstan-baseline cs-fix cs-check
+.PHONY: help build up down restart logs ps composer certs phpstan phpstan-baseline cs-fix cs-check tw-build tw-watch
 
 help: ## Affiche cette aide
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
@@ -44,6 +44,16 @@ certs: ## Génère les certificats mkcert pour HTTPS local
 	@cd certs && mkcert localhost 127.0.0.1 ::1
 	@echo "✅ Certificats générés dans certs/"
 	@echo "⚠️  Redémarrez les conteneurs avec: make restart"
+
+##
+## Frontend
+##
+
+tw-build: ## Compile Tailwind CSS pour production
+	./tailwindcss -i assets/styles/app.css -o public/build/app.css --minify
+
+tw-watch: ## Compile Tailwind CSS en mode watch
+	./tailwindcss -i assets/styles/app.css -o public/build/app.css --watch
 
 ##
 ## Qualité de code

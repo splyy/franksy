@@ -2,8 +2,11 @@
 services:
 ###> doctrine/doctrine-bundle ###
   database:
-    ports:
-      - "5432"
+    # Optimisations dev (NE PAS UTILISER EN PROD)
+    command: postgres -c fsync=off -c synchronous_commit=off
+    shm_size: 256mb
+    tmpfs:
+      - /var/run/postgresql
 ###< doctrine/doctrine-bundle ###
 
 ###> symfony/mailer ###

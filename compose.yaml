@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: franksy_app
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
@@ -15,29 +17,31 @@ services:
     environment:
       APP_ENV: dev
       APP_DEBUG: 1
+      SERVER_NAME: ${SERVER_NAME}
+      SYMFONY_VERSION: ${SYMFONY_VERSION}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:${POSTGRES_HOST_PORT}/${POSTGRES_DB}?serverVersion=${POSTGRES_VERSION}&charset=${POSTGRES_CHARSET}
       FRANKENPHP_CONFIG: "worker ./public/index.php"
-      SERVER_NAME: "localhost"
-    depends_on:
-      database:
-        condition: service_healthy
+    tty: true
 
   database:
-    image: postgres:15-alpine
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    container_name: franksy_database
+    restart: always
     ports:
-      - "5432:5432"
+      - ${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}
     environment:
-      POSTGRES_USER: app
-      POSTGRES_PASSWORD: secret
-      POSTGRES_DB: app
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U app -d app" ]
-      interval: 5s
+      test: [ "CMD", "pg_isready", "-d", "${POSTGRES_DB}", "-U", "${POSTGRES_USER}" ]
       timeout: 5s
       retries: 5
+      start_period: 60s
+    volumes:
+      - db_data:/var/lib/postgresql/data:rw
 
 volumes:
-  postgres_data:
+  db_data:
   caddy_data:
   caddy_config:
